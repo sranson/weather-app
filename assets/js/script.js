@@ -9,20 +9,38 @@ var searchBtn = document.getElementById('searchBtn');
 
 
 let cityName = "";
-let apiKey = '3eddf3b54ddbebd3f11283b1ab983c30';
+let apiKey = '';
 
 function getCityName() {
     cityName = searchBox.value;
     console.log(cityName);
+    getWeatherData();
 }
 
 
 var getWeatherData = function(cityName) {
     var apiURL = 'https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}';
 
+    fetch(apiURL)
+        .then(function (response) {
+            if (response.ok) {
+                response.json()
+                .then(function (data) {
+                    displayWeatherData(data, cityName);
+                });
+            } else {
+                alert('Error' + response.statusText);
+            }
+        })
+        .catch(function (error) {
+            alert('Unable to connect to Weather API');
+        });
+};
 
+
+function displayWeatherData() {
+    console.log('DISPLAYING WEATHER DATA');
 }
-
 
 searchBtn.addEventListener('click', getCityName);
 
