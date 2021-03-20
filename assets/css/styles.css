@@ -1,9 +1,8 @@
 
 .customNavbar {
-    display: flex;
     background-color: black;
     color: white;
-    padding-left: 25%;
+    font-size: 40px;
 }
 
 .card {
@@ -33,4 +32,13 @@ h5 {
 .cityHeaderText {
     padding-top: 3%;
     padding-left: 2%;
+}
+
+.fiveDayForecast {
+    padding-top: 3%;
+}
+
+.blueBackground {
+    background-color: #007BFF;
+    color: white;
 }
