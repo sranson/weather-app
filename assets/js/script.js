@@ -9,17 +9,17 @@ var searchBtn = document.getElementById('searchBtn');
 
 
 let cityName = "";
-let apiKey = '';
+
 
 function getCityName() {
     cityName = searchBox.value;
     console.log(cityName);
-    getWeatherData();
+    getWeatherData(cityName);
 }
 
 
 var getWeatherData = function(cityName) {
-    var apiURL = 'https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}';
+    var apiURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=3eddf3b54ddbebd3f11283b1ab983c30';
 
     fetch(apiURL)
         .then(function (response) {
