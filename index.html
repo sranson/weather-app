@@ -28,7 +28,8 @@
 
       <div class="row">
 
-        <!--LEFT COLUMN-->
+<!--LEFT COLUMN-->
+<!--==================================================================================================================================-->
         <div class="col-md-3">
             <div class="card leftTopCard">
             
@@ -36,11 +37,11 @@
                     <h5>Search for a City:</h5>
 
                     <div class="input-group mb-3 customSearchBox">
-                        <input type="text" class="form-control">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                        <input type="text" class="form-control" id="searchBox">
+                        <button class="btn btn-outline-secondary" type="button" id="searchBtn">Search</button>
                       </div>
 
-                    <div>
+                    <div id="pastCities">
                         <ul class="list-group customUl">
                             <li class="list-group-item">Austin</li>
                             <li class="list-group-item">Chicago</li>
@@ -56,10 +57,12 @@
             </div>
         </div>
 
-        <!--RIGHT COLUMN-->
+<!--==================================================================================================================================-->
+
+<!--RIGHT TOP COLUMN-->
+<!--==================================================================================================================================-->
         <div class="col-md-9">
             <div class="card text-start customRopRightCard" >
-                
                 <div class="cityHeaderText">
                   <h2>Atlanta (8/15/2019)</h2>
                 </div>
@@ -70,18 +73,21 @@
                     <p>Wind Speed: 4.7 MPH</p>
                     <p>UV Index: 9.49</p>
                 </div>
-
               </div>
+<!--==================================================================================================================================-->
 
+<!--RIGHT BOTTOM COLUMN-->
+<!--==================================================================================================================================-->
               <div class="fiveDayForecast">
                 <h3>5-Day Forecast</h3>
             </div>
 
-            <!--CARDS-->
+<!--CARDS-->
             
             <div class="row">
-                <div class="col-sm-3">
-                  <div class="card blueBackground">
+
+                <div class="col-sm-2">
+                  <div class="card blueBackground" id="day1">
                     <div class="card-body">
                       <h5 class="card-title">8/16/2019</h5>
                       <p class="card-text">Temp: 86.84</p>
@@ -90,8 +96,8 @@
                   </div>
                 </div>
                 
-                <div class="col-sm-3">
-                  <div class="card blueBackground">
+                <div class="col-sm-2">
+                  <div class="card blueBackground" id="day2">
                     <div class="card-body">
                       <h5 class="card-title">8/17/2019</h5>
                       <p class="card-text">Temp: 86.84</p>
@@ -100,8 +106,8 @@
                   </div>
                 </div>
 
-                <div class="col-sm-3">
-                    <div class="card blueBackground">
+                <div class="col-sm-2">
+                    <div class="card blueBackground" id="day3">
                       <div class="card-body">
                         <h5 class="card-title">8/18/2019</h5>
                         <p class="card-text">Temp: 86.84</p>
@@ -110,8 +116,8 @@
                     </div>
                   </div>
 
-                  <div class="col-sm-3">
-                    <div class="card blueBackground">
+                  <div class="col-sm-2">
+                    <div class="card blueBackground" id="day4">
                       <div class="card-body">
                         <h5 class="card-title">8/20/2019</h5>
                         <p class="card-text">Temp: 86.84</p>
@@ -119,25 +125,28 @@
                       </div>
                     </div>
                   </div>
+
+                  <div class="col-sm-2">
+                    <div class="card blueBackground" id="day5">
+                      <div class="card-body">
+                        <h5 class="card-title">8/21/2019</h5>
+                        <p class="card-text">Temp: 86.84</p>
+                        <p>Humidity: 43%</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+
               </div>
-
-              
-
-              
-
-
-
         </div>
 
-      </div>
-
-
-
-
-
-
+<!--==================================================================================================================================-->
+      
+      </div> <!--End of div.row-->
     </div> <!--End of Div.container-->
   </body>
 
   <script src="/assets/js/script.js"></script>
+  <script src="/assets/js/mockAPI.js"></script>
 </html>

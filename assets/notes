@@ -1,0 +1,30 @@
+// API Call link:
+// https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+
+// UV Index
+// https://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid={API key}
+
+//API Key
+// **************API Key: 3eddf3b54ddbebd3f11283b1ab983c30***********
+
+
+//3. Identify api parameters that will be needed for relevant api calls (ie. temp, humidity, etc)
+// a) City Name
+// b) Temerature
+// c) Humidity
+// d) Wind Speed
+// e) UV Index
+// f) 5 Day Forcast with "Date", "Temperature", and "Himidity"
+
+// 4. Identify paths to access api parameters 
+// a) City Name                         =>  .name    
+// b) Temerature                        => .main.temp
+// c) Humidity                          => .main.humidity
+// d) Wind Speed                        => .wind.speed
+// e) Description                       => .weather[0].description
+// f) Description ICON                  => .weather[0].icon
+// g) UV Index
+
+// 5. Add fetch/.then() boilerplate from solved files
+
+
