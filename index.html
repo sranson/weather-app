@@ -1,22 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="/assets/css/styles.css">
-</head>
-<body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+  </head>
+  <body>
     <div class="container">
-        <h1>Weather App</h1>
+        
+      <header>
+        <nav class="navbar customNavbar">
+            <div class="container-fluid">
+              <span class="customNavbar">
+                Weather Dashboard
+              </span>
+            </div>
+          </nav>
+      </header>
+
+      <div>
+
+        <!--LEFT COLUMN-->
+        <div class="col-md-4" style="background-color: orange;">
+            <div class="card">
+            
+
+                    <h5>Search for a City:</h5>
+
+                    <div class="input-group mb-3 customSearchBox">
+                        <input type="text" class="form-control">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                      </div>
+
+                    <div>
+                        <ul class="list-group customUl">
+                            <li class="list-group-item">Austin</li>
+                            <li class="list-group-item">Chicago</li>
+                            <li class="list-group-item">New York</li>
+                            <li class="list-group-item">Orlando</li>
+                            <li class="list-group-item">San Francisco</li>
+                            <li class="list-group-item">Seattle</li>
+                        </ul>
+                    </div>
+                    
+            </div>
+        </div>
+
+        <!--RIGHT COLUMN-->
+        <div class="col-md-8" style="background-color: red;">
+            
+        </div>
+
+      </div>
 
 
 
-    </div>
-    
-</body>
 
-<script src="/assets/js/script.js"></script>
+
+
+    </div> <!--End of Div.container-->
+  </body>
+
+  <script src="/assets/js/script.js"></script>
 </html>
