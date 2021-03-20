@@ -5,8 +5,9 @@
     font-size: 40px;
 }
 
-.card {
+.leftTopCard {
     background-color: #F8F9FA;
+    margin-top: 6%;
 }
 
 h5 {
