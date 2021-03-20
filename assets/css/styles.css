@@ -6,6 +6,9 @@
     padding-left: 25%;
 }
 
+.card {
+    background-color: #F8F9FA;
+}
 
 h5 {
     padding-left: 2%;
@@ -21,4 +24,13 @@ h5 {
 .customUl {
     padding: 2% 2% 2% 2%;
 
+}
+
+.customRopRightCard {
+    margin-top: 2%;
+}
+
+.cityHeaderText {
+    padding-top: 3%;
+    padding-left: 2%;
 }
