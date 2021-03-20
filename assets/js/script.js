@@ -13,7 +13,6 @@ let cityName = "";
 
 function getCityName() {
     cityName = searchBox.value;
-    console.log(cityName);
     getWeatherData(cityName);
 }
 
@@ -38,8 +37,14 @@ var getWeatherData = function(cityName) {
 };
 
 
-function displayWeatherData() {
-    console.log('DISPLAYING WEATHER DATA');
+function displayWeatherData(data) {
+    weatherData = data;
+    city = weatherData.name;
+    temp = weatherData.main.temp;
+    humidity = weatherData.main.humidity;
+    windSpeed = weatherData.wind.speed;
+    description = weatherData.weather[0].description;
+    icon = weatherData.weather[0].icon;
 }
 
 searchBtn.addEventListener('click', getCityName);
