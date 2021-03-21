@@ -11,6 +11,7 @@ var listItem = document.getElementById('listItem');
 
 
 
+
 // I will add that variable to a template literal that has the API call URL => This will then be stored in a variable
 // I will then pass the full API string variable to fetch 
 // I will do a .then function that passes "response" as a parameter
@@ -85,14 +86,21 @@ index = 0;
 function addNewCity() {
     if (searchedFor[index] !== undefined) {
         newListItem = document.createElement('button');
+        newListItem.setAttribute("id", index);
         newListItem.classList.add('btn');
         newListItem.classList.add('customBtn');
         pastCities.append(newListItem);
         newListItem.innerHTML = `${searchedFor[index]}`
         index = index+1;
-        // store search history in localStorage so that if a button is clicked in Search History, the data shows on HTML page
+        // store search history in localStorage so that if a button is clicked in Search , the data shows on HTML page
     }
 }
+
+$(pastCities).click(function(e) {
+    previousCity = e.target.id;
+    console.log(`The ID for the previous city is ${previousCity}`);
+})
+
 
 
 searchBtn.addEventListener('click', getCityName);
