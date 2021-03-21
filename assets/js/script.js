@@ -1,5 +1,13 @@
 var searchBox = document.getElementById('searchBox');
 var searchBtn = document.getElementById('searchBtn');
+var cityNM = document.getElementById('cityName');
+var date = document.getElementById('date');
+var pastCities = document.getElementById('pastCities');
+var temperature = document.getElementById('temp');
+var windSpeed = document.getElementById('windSpeed');
+var pastCities = document.getElementById('pastCities');
+var listItem = document.getElementById('listItem');
+
 
 
 
@@ -7,6 +15,11 @@ var searchBtn = document.getElementById('searchBtn');
 // I will then pass the full API string variable to fetch 
 // I will do a .then function that passes "response" as a parameter
 
+function showDate() {
+    currentDate = moment().format('dddd MMMM Do YYYY');
+    date.innerHTML = currentDate;            
+}
+showDate();
 
 let cityName = "";
 
@@ -14,6 +27,7 @@ let cityName = "";
 function getCityName() {
     cityName = searchBox.value;
     getWeatherData(cityName);
+    showSearchedFor(cityName);
 }
 
 
@@ -25,7 +39,7 @@ var getWeatherData = function(cityName) {
             if (response.ok) {
                 response.json()
                 .then(function (data) {
-                    displayWeatherData(data, cityName);
+                    formatWeatherData(data, cityName);
                 });
             } else {
                 alert('Error' + response.statusText);
@@ -37,17 +51,51 @@ var getWeatherData = function(cityName) {
 };
 
 
-function displayWeatherData(data) {
+function formatWeatherData(data) {
     weatherData = data;
     city = weatherData.name;
     temp = weatherData.main.temp;
-    humidity = weatherData.main.humidity;
-    windSpeed = weatherData.wind.speed;
+    hum = weatherData.main.humidity;
+    ws = weatherData.wind.speed;
     description = weatherData.weather[0].description;
     icon = weatherData.weather[0].icon;
+    showWeatherData(city, temp, hum, ws, description, icon);
 }
 
+
+function showWeatherData (city, temp, hum, ws, description, icon) {
+    cityNM.innerHTML = city;
+    temperature.innerHTML = `Temperature: ${temp}`;
+    humidity.innerHTML = `Humidity: ${hum}%`;
+    windSpeed.innerHTML = `Wind Speed: ${ws} MPH`;
+}
+
+var searchedFor = [];
+
+
+function showSearchedFor () {
+    cityNM.classList.remove('hidden');
+    pastCities.classList.remove('hidden');
+    searchedFor.push(cityName);
+    searchedFor.forEach(addNewCity)
+}
+
+index = 0;
+
+function addNewCity() {
+    if (searchedFor[index] !== undefined) {
+        newListItem = document.createElement('li');
+        newListItem.classList.add('list-group-item');
+        pastCities.append(newListItem);
+        newListItem.innerHTML = `${searchedFor[index]}`
+        index = index+1;
+    }
+}
+
+
 searchBtn.addEventListener('click', getCityName);
+
+
 
 
 
