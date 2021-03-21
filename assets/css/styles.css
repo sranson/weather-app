@@ -47,3 +47,13 @@ h5 {
     background-color: #007BFF;
     color: white;
 }
+
+
+.customBtn {
+    background-color:white;
+    border: .5px gray;
+    border-style:solid;
+    border-radius: 0%;
+    
+    
+}

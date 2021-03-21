@@ -84,11 +84,13 @@ index = 0;
 
 function addNewCity() {
     if (searchedFor[index] !== undefined) {
-        newListItem = document.createElement('li');
-        newListItem.classList.add('list-group-item');
+        newListItem = document.createElement('button');
+        newListItem.classList.add('btn');
+        newListItem.classList.add('customBtn');
         pastCities.append(newListItem);
         newListItem.innerHTML = `${searchedFor[index]}`
         index = index+1;
+        // store search history in localStorage so that if a button is clicked in Search History, the data shows on HTML page
     }
 }
 
