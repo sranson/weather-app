@@ -98,9 +98,15 @@ function addNewCity() {
 
 $(pastCities).click(function(e) {
     previousCity = e.target.id;
-    console.log(`The ID for the previous city is ${previousCity}`);
+    previousCityName = searchedFor[previousCity];
+    showHistory(previousCityName);
 })
 
+function showHistory() {
+    console.log(`You are searching for ${previousCityName} AGAIN!`);
+    // call the function that is making the API call
+    getWeatherData(previousCityName);
+}
 
 
 searchBtn.addEventListener('click', getCityName);
