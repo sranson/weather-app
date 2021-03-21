@@ -1,0 +1,16 @@
+
+API URL to get UV Index - needs latitude and logitude
+
+http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid={API key}
+
+
+
+API to get UV Index for Atlanta (needs latitude and logitude)
+
+http://api.openweathermap.org/data/2.5/uvi?lat=33.749&lon=-84.388&appid=3eddf3b54ddbebd3f11283b1ab983c30
+
+
+To Get the UV Index:
+1. Enter the URL
+2. Pass the "lat" and "log" coordicates to the URL
+3. Once the promise is returned, the file path is                      => .value

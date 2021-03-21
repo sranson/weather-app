@@ -7,18 +7,13 @@ var temperature = document.getElementById('temp');
 var windSpeed = document.getElementById('windSpeed');
 var pastCities = document.getElementById('pastCities');
 var listItem = document.getElementById('listItem');
+var uvIndex = document.getElementById('uvIndex');
 
 
-
-
-
-// I will add that variable to a template literal that has the API call URL => This will then be stored in a variable
-// I will then pass the full API string variable to fetch 
-// I will do a .then function that passes "response" as a parameter
 
 function showDate() {
     currentDate = moment().format('dddd MMMM Do YYYY');
-    date.innerHTML = currentDate;            
+    date.innerHTML = `(${currentDate})`;  
 }
 showDate();
 
@@ -31,7 +26,6 @@ function getCityName() {
     showSearchedFor(cityName);
 }
 
-
 var getWeatherData = function(cityName) {
     var apiURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=3eddf3b54ddbebd3f11283b1ab983c30';
 
@@ -40,7 +34,8 @@ var getWeatherData = function(cityName) {
             if (response.ok) {
                 response.json()
                 .then(function (data) {
-                    formatWeatherData(data, cityName);
+                    formatWeatherData(data, cityName);          //stores data into variables
+                    formatUVindex(data, cityName);              // stores data into variables
                 });
             } else {
                 alert('Error' + response.statusText);
@@ -48,6 +43,27 @@ var getWeatherData = function(cityName) {
         })
         .catch(function (error) {
             alert('Unable to connect to Weather API');
+        });
+};
+
+var getUVIndex = function(lat, lon) {
+    latitude = lat;                         //THIS WORKS!
+    longitude = lon;                        // THIS WORKS
+    var indexAPIurl = 'https://api.openweathermap.org/data/2.5/uvi?lat=' + latitude + '&lon=' + longitude + '&appid=3eddf3b54ddbebd3f11283b1ab983c30';
+
+    fetch(indexAPIurl)
+        .then(function (response) {
+            if (response.ok) {
+                response.json()
+                .then(function (data) {
+                    showUVIndex(data);
+                });
+            } else {
+                alert('Error' + response.statusText);
+            }
+        })
+        .catch(function(error) {
+            alert('Unable to connect to UV Index API');
         });
 };
 
@@ -63,6 +79,11 @@ function formatWeatherData(data) {
     showWeatherData(city, temp, hum, ws, description, icon);
 }
 
+function formatUVindex(data) {
+    lat = weatherData.coord.lat;                    //THIS WORKS!
+    lon = weatherData.coord.lon;                    // THIS WORKS!
+    getUVIndex(lat, lon);                           // passes lat and lon to function that makes API call for UV Index
+}
 
 function showWeatherData (city, temp, hum, ws, description, icon) {
     cityNM.innerHTML = city;
@@ -71,19 +92,29 @@ function showWeatherData (city, temp, hum, ws, description, icon) {
     windSpeed.innerHTML = `Wind Speed: ${ws} MPH`;
 }
 
-var searchedFor = [];
 
+function showUVIndex(data) {
+    console.log("I GOT THE UV INDEX DATA!");
+    UVData = data;
+    finalUVIndex = UVData.value;
+    //ADD THE UV INDEX TO THE HTML PAGE HERE
+    uvIndex.innerHTML = `UV Index: ${finalUVIndex}`;
+
+}
+
+
+var searchedFor = [];
 
 function showSearchedFor () {
     cityNM.classList.remove('hidden');
     pastCities.classList.remove('hidden');
     searchedFor.push(cityName);
-    searchedFor.forEach(addNewCity)
+    searchedFor.forEach(addCitytoSearchHistory)
 }
 
 index = 0;
 
-function addNewCity() {
+function addCitytoSearchHistory() {
     if (searchedFor[index] !== undefined) {
         newListItem = document.createElement('button');
         newListItem.setAttribute("id", index);
@@ -92,7 +123,6 @@ function addNewCity() {
         pastCities.append(newListItem);
         newListItem.innerHTML = `${searchedFor[index]}`
         index = index+1;
-        // store search history in localStorage so that if a button is clicked in Search , the data shows on HTML page
     }
 }
 
@@ -103,8 +133,6 @@ $(pastCities).click(function(e) {
 })
 
 function showHistory() {
-    console.log(`You are searching for ${previousCityName} AGAIN!`);
-    // call the function that is making the API call
     getWeatherData(previousCityName);
 }
 
