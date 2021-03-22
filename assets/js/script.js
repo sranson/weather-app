@@ -8,6 +8,10 @@ var windSpeed = document.getElementById("windSpeed");
 var pastCities = document.getElementById("pastCities");
 var listItem = document.getElementById("listItem");
 var uvIndex = document.getElementById("uvIndex");
+var topIcon = document.getElementById('topIcon');
+
+
+//http://openweathermap.org/img/w/10d.png
 
 
 // VARIABLES
@@ -15,87 +19,14 @@ var uvIndex = document.getElementById("uvIndex");
 let cityName = "";
 var searchedFor = [];
 index = 0;
+dateArray = [];
+temperatureArray = [];
+humidityArray = [];
 //==========================================================================================
 
-// API CALLS
-//==========================================================================================
 
-//MAKES API CALL TO GET WEATHER DATA
-var getWeatherData = function (cityName) {
-  var apiURL =
-    "https://api.openweathermap.org/data/2.5/weather?q=" +
-    cityName +
-    "&appid=3eddf3b54ddbebd3f11283b1ab983c30";
 
-  fetch(apiURL)
-    .then(function (response) {
-      if (response.ok) {
-        response.json().then(function (data) {
-          formatWeatherData(data, cityName); //stores data into variables
-          formatUVindex(data, cityName); // stores data into variables
-        });
-      } else {
-        alert("Error" + response.statusText);
-      }
-    })
-    .catch(function (error) {
-      alert("Unable to connect to Weather API");
-    });
-};
 
-// MAKE API CALL TO GET 5 DAY FORECAST - WILL NEED LATITUDE AND LONGITUDE
-var get5DayForecast = function (lat, lon) {
-  latitude = lat;
-  longitude = lon;
-  var weekForecastAPI =
-    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
-    latitude +
-    "&lon=" +
-    longitude +
-    "&exclude=minutely,hourly&appid=3eddf3b54ddbebd3f11283b1ab983c30";
-
-  fetch(weekForecastAPI)
-    .then(function (response) {
-      if (response.ok) {
-        response.json().then(function (data) {
-          do5DayForecastWork(data);
-        });
-      } else {
-        alert("Error" + response.statusText);
-      }
-    })
-    .catch(function (error) {
-      alert("Unable to connect to Weather API");
-    });
-};
-
-//MAKES API CALL TO GET UV INDEX
-var getUVIndex = function (lat, lon) {
-  latitude = lat;
-  longitude = lon;
-  var indexAPIurl =
-    "https://api.openweathermap.org/data/2.5/uvi?lat=" +
-    latitude +
-    "&lon=" +
-    longitude +
-    "&appid=3eddf3b54ddbebd3f11283b1ab983c30";
-
-  fetch(indexAPIurl)
-    .then(function (response) {
-      if (response.ok) {
-        response.json().then(function (data) {
-          showUVIndex(data);
-        });
-      } else {
-        alert("Error" + response.statusText);
-      }
-    })
-    .catch(function (error) {
-      alert("Unable to connect to UV Index API");
-    });
-};
-
-//==========================================================================================
 
 //FUNCTIONS
 //==========================================================================================
@@ -129,12 +60,8 @@ function formatWeatherData(data) {
   showWeatherData(city, temp, hum, ws, description, icon);
 }
 
-dateArray = [];
-temperatureArray = [];
-humidityArray = [];
 
-
-
+// FORMATS AND DISPLAYS 5 DAY FORECAST DATA ON HTML PAGE
 function do5DayForecastWork(data) {
   // 5 DAY FORECAST ARRAYS
     dateArray = [];
@@ -178,6 +105,14 @@ function showWeatherData(city, temp, hum, ws, description, icon) {
   temperature.innerHTML = `Temperature: ${temp}`;
   humidity.innerHTML = `Humidity: ${hum}%`;
   windSpeed.innerHTML = `Wind Speed: ${ws} MPH`;
+  console.log(icon);
+  iconSrc = "https://openweathermap.org/img/w/" + icon + ".png";
+  console.log(iconSrc);
+  topIcon.innerHTML = `
+    <img src="${iconSrc}" alt="">
+    `
+  //topIcon.innerHTML = `src="${iconSrc}"`;
+  
 }
 
 //ADDS UV INDEX TO HTML
@@ -214,11 +149,14 @@ function showHistory() {
   getWeatherData(previousCityName);
 }
 
+// Clears content in text input after "search" button clicked
 function clearText() {
     searchBox.value = '';
 }
-
 //==========================================================================================
+
+
+
 
 // EVENT LISTENERS
 //==========================================================================================
@@ -231,7 +169,7 @@ $(pastCities).click(function (e) {
 searchBtn.addEventListener("click", getCityName);
 //==========================================================================================
 
-// The 5 day forecast will populate in the small cards
+
 // The UV index will be colorcoded
-// The temperature will be converted from Kelvin to Fahrenheit
+// Add the "Degrees in fahrenheit" to ALL temperatures
 // Descriptive icons will be added
