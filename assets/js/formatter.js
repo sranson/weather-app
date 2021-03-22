@@ -5,6 +5,3 @@ var temperatureConversion = function (temp) {
     //console.log(temp);
     return temp;
 }
-
-
-//ICONS

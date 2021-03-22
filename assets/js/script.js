@@ -22,6 +22,7 @@ index = 0;
 dateArray = [];
 temperatureArray = [];
 humidityArray = [];
+iconArray = [];
 //==========================================================================================
 
 
@@ -33,7 +34,7 @@ humidityArray = [];
 
 //SHOWS CURRENT DATE
 function showDate() {
-  currentDate = moment().format("dddd MMMM Do YYYY");
+  currentDate = moment().format("MM/DD/YYYY");
   date.innerHTML = `(${currentDate})`;
 }
 showDate();
@@ -67,14 +68,17 @@ function do5DayForecastWork(data) {
     dateArray = [];
     temperatureArray = [];
     humidityArray = [];
+    iconArray = []
   for (i = 1; i < 6; i++) {
     dateArray.push(moment.unix(data.daily[i].dt).format("MM/DD/YYYY"));
     temperatureArray.push(temperatureConversion(data.daily[i].temp.day));
     humidityArray.push(data.daily[i].humidity);
+    iconArray.push(data.daily[i].weather[0].icon);
   }
   show5DayForecast();
 }
 
+// RENDERS 5 DAY FORECAST TO THE PAGE
 function show5DayForecast() {
   for (i = 0; i < 5; i++) {
     weeklyForecast.innerHTML += `
@@ -82,6 +86,7 @@ function show5DayForecast() {
     <div class="card blueBackground">
     <div class="card-body">
         <h5 class="card-title" style="font-size: 16px">${dateArray[i]}</h5>
+        <img src="https://openweathermap.org/img/w/${iconArray[i]}.png">
         <p class="card-text">Temp: ${temperatureArray[i]}</p>
         <p>Humidity: ${humidityArray[i]}%</p>
     </div>
@@ -105,14 +110,10 @@ function showWeatherData(city, temp, hum, ws, description, icon) {
   temperature.innerHTML = `Temperature: ${temp}`;
   humidity.innerHTML = `Humidity: ${hum}%`;
   windSpeed.innerHTML = `Wind Speed: ${ws} MPH`;
-  console.log(icon);
   iconSrc = "https://openweathermap.org/img/w/" + icon + ".png";
-  console.log(iconSrc);
   topIcon.innerHTML = `
     <img src="${iconSrc}" alt="">
     `
-  //topIcon.innerHTML = `src="${iconSrc}"`;
-  
 }
 
 //ADDS UV INDEX TO HTML
