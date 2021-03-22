@@ -1,16 +1,31 @@
 
-API URL to get UV Index - needs latitude and logitude
+        //console.log(data.list[i].dt_txt);
+        //if (data.list[i].dt_txt === day1Date) {
+            //console.log('SHOWING WEATHER FOR TOMORROW');
+        
+        //console.log(data.list[i].dt_txt);
+    //}
 
-http://api.openweathermap.org/data/2.5/uvi?lat={lat}&lon={lon}&appid={API key}
+//tmrDate = data.list[0].dt_txt;                                  
+//console.log(tmrDate)                                                    // tmrDate === day1Date
+//console.log(data);                                                      // Day1: 1-7    Day2: 8-15          Day 3: 16- 23       Day4: 24-31             Day5: 32-40
 
 
+/*
+3. Once the promise is returned, the path for the date is                         => .list[i].dt_txt
+4. The path for the temperature is                                                => .main.temp
+5. The path for the humidity is                                                   => main.humidity
+*/
 
-API to get UV Index for Atlanta (needs latitude and logitude)
 
-http://api.openweathermap.org/data/2.5/uvi?lat=33.749&lon=-84.388&appid=3eddf3b54ddbebd3f11283b1ab983c30
+API RETURNS THE FOLLOWING DATE FORMAT:      
+2021-03-22 00:00:00
 
 
-To Get the UV Index:
-1. Enter the URL
-2. Pass the "lat" and "log" coordicates to the URL
-3. Once the promise is returned, the file path is                      => .value
+Momentjs :
+today = moment().format('YYYY-MM-DD') + " 00:00:00"
+day1Date = moment().add(1, 'days').format('YYYY-MM-DD') + " 00:00:00"       
+day2Date = moment().add(2, 'days').format('YYYY-MM-DD') + " 00:00:00" 
+day3Date = moment().add(3, 'days').format('YYYY-MM-DD') + " 00:00:00" 
+day4Date = moment().add(4, 'days').format('YYYY-MM-DD') + " 00:00:00"
+day5Date = moment().add(4, 'days').format('YYYY-MM-DD') + " 00:00:00" 
