@@ -1,31 +1,21 @@
 
-        //console.log(data.list[i].dt_txt);
-        //if (data.list[i].dt_txt === day1Date) {
-            //console.log('SHOWING WEATHER FOR TOMORROW');
-        
-        //console.log(data.list[i].dt_txt);
-    //}
-
-//tmrDate = data.list[0].dt_txt;                                  
-//console.log(tmrDate)                                                    // tmrDate === day1Date
-//console.log(data);                                                      // Day1: 1-7    Day2: 8-15          Day 3: 16- 23       Day4: 24-31             Day5: 32-40
+ 
+API URL FOR 5 DAY FORECAST WITH EXCLUSIONS!
+https://api.openweathermap.org/data/2.5/onecall?lat=33.749&lon=-84.388&exclude=minutely,hourly&appid=3eddf3b54ddbebd3f11283b1ab983c30
 
 
-/*
-3. Once the promise is returned, the path for the date is                         => .list[i].dt_txt
-4. The path for the temperature is                                                => .main.temp
-5. The path for the humidity is                                                   => main.humidity
-*/
+5 Day Forecast Notes:
+1. To access the API Date from the 5-Day Forecast                   
+    today                                                   ===>  .current.dt                                      
+    Day1Test                                                ===> .daily[1].dt                                          
+    Day2Test                                                ===> .daily[2].dt
+    Day2Test                                                ===> .daily[3].dt
 
 
-API RETURNS THE FOLLOWING DATE FORMAT:      
-2021-03-22 00:00:00
 
-
-Momentjs :
-today = moment().format('YYYY-MM-DD') + " 00:00:00"
-day1Date = moment().add(1, 'days').format('YYYY-MM-DD') + " 00:00:00"       
-day2Date = moment().add(2, 'days').format('YYYY-MM-DD') + " 00:00:00" 
-day3Date = moment().add(3, 'days').format('YYYY-MM-DD') + " 00:00:00" 
-day4Date = moment().add(4, 'days').format('YYYY-MM-DD') + " 00:00:00"
-day5Date = moment().add(4, 'days').format('YYYY-MM-DD') + " 00:00:00" 
+today = data.current.dt                                                                           //march 22nd
+day1Date = data.daily[1].dt                                                                      //moment.unix(1616518800);                                             //1616518800
+day2Date = data.daily[2].dt                                                                      //moment.unix(1616605200);                                             //1616605200
+day3Date = data.daily[3].dt                                                                      //moment.unix(1616691600);                                            //1616691600
+day4Date = data.daily[4].dt                                                                      //moment.unix(1616778000);                                          //1616778000
+day5Date = data.daily[5].dt                                                                      //moment.unix(1616864400);                                         //1616864400

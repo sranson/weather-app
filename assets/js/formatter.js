@@ -6,8 +6,7 @@ String.prototype.removeCharAt = function (i) {
 }
 
 
-function formatAPIDate(unformattedDate) {
-    //console.log(unformattedDate);                     //THIS GETS DATA!!!!!!!
+function formatAPIDate(unformattedDate) {   
 let formattedDate = unformattedDate.removeCharAt(12);
 formattedDate = formattedDate.removeCharAt(12);
 formattedDate = formattedDate.removeCharAt(12);            
@@ -19,8 +18,18 @@ formattedDate = formattedDate.removeCharAt(12);
 formattedDate = formattedDate.removeCharAt(12);                                    
 formattedDate = formattedDate.removeCharAt(12);  
 formattedDate = formattedDate.trim();
-//console.log(formattedDate);                             //THIS WORKS - PASS IT BACK TO MAIN JS FILE
-do5DayForecastWork(formattedDate);
+//console.log(formattedDate);                             //Before sending the date to the 'do5DayForecastWork' function, I need to select only ONE of each date
+getOneOfEachDate(formattedDate);
+}
+
+
+
+function getOneOfEachDate(formattedDate) {
+    console.log(formattedDate);
+    console.log(typeof formattedDate);
+    
+
+    do5DayForecastWork(formattedDate);
 }
 
 

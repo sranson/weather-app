@@ -26,7 +26,6 @@ index = 0;
 // API CALLS
 //==========================================================================================
 
-
 //MAKES API CALL TO GET WEATHER DATA
 var getWeatherData = function(cityName) {
     var apiURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=3eddf3b54ddbebd3f11283b1ab983c30';
@@ -38,7 +37,6 @@ var getWeatherData = function(cityName) {
                 .then(function (data) {
                     formatWeatherData(data, cityName);          //stores data into variables
                     formatUVindex(data, cityName);              // stores data into variables
-                    get5DayForecast(cityName);
                 });
             } else {
                 alert('Error' + response.statusText);
@@ -49,33 +47,33 @@ var getWeatherData = function(cityName) {
         });
 };
 
+// MAKE API CALL TO GET 5 DAY FORECAST - WILL NEED LATITUDE AND LONGITUDE
+var get5DayForecast = function(lat, lon) {
+    latitude = lat; 
+    longitude = lon;
+    var weekForecastAPI = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + latitude + '&lon=' + longitude + '&exclude=minutely,hourly&appid=3eddf3b54ddbebd3f11283b1ab983c30';
 
-// MAKE API CALL TO GET 5 DAY FORECAST
-var get5DayForecast = function(cityname) {
-    //console.log(cityName);//                    //THIS WORKS!
-    var weekForecastAPIurl = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=3eddf3b54ddbebd3f11283b1ab983c30";
-
-    fetch(weekForecastAPIurl)
-        .then(function(response) {
-            if (response.ok) {
-                response.json()
-                .then(function (data) {
-                    format5dayForecast(data);
-                });
-            } else {
-                alert('Error' + response.statusText);
-            }
-        })
-        .catch(function (error) {
-            alert('Unable to connect to 5 Day Forecast API');
-        });
+    fetch(weekForecastAPI)
+    .then(function (response) {
+        if (response.ok) {
+            response.json()
+            .then(function (data) {
+                do5DayForecastWork(data);
+            });
+        } else {
+            alert('Error' + response.statusText);
+        }
+    })
+    .catch(function (error) {
+        alert('Unable to connect to Weather API');
+    });
 };
-
+    
 
 //MAKES API CALL TO GET UV INDEX
 var getUVIndex = function(lat, lon) {
     latitude = lat;                         
-    longitude = lon;                        
+    longitude = lon;                     
     var indexAPIurl = 'https://api.openweathermap.org/data/2.5/uvi?lat=' + latitude + '&lon=' + longitude + '&appid=3eddf3b54ddbebd3f11283b1ab983c30';
 
     fetch(indexAPIurl)
@@ -131,37 +129,22 @@ function formatWeatherData(data) {
     showWeatherData(city, temp, hum, ws, description, icon);
 }
 
+
+function do5DayForecastWork(data) {
+    today = data.current.dt                                                                        
+    day1Date = data.daily[1].dt                                                                   
+    day2Date = data.daily[2].dt                                                                   
+    day3Date = data.daily[3].dt                                                                 
+    day4Date = data.daily[4].dt                                                                   
+    day5Date = data.daily[5].dt                                                                      
+}
+
 //STORES DATA INTO VARIABLES AND PASSES IT TO FUNCTION THAT MAKES API CALL
 function formatUVindex(data) {
     lat = weatherData.coord.lat;                  
     lon = weatherData.coord.lon;                   
-    getUVIndex(lat, lon);                         
-}
-
-today = moment().format('YYYY-MM-DD');
-day1Date = moment().add(1, 'days').format('YYYY-MM-DD');       
-day2Date = moment().add(2, 'days').format('YYYY-MM-DD'); 
-day3Date = moment().add(3, 'days').format('YYYY-MM-DD');
-day4Date = moment().add(4, 'days').format('YYYY-MM-DD');
-day5Date = moment().add(4, 'days').format('YYYY-MM-DD');
-//day1Date == formattedDate.trim()                  ==> true!!!!!!!!!!!
-
-function format5dayForecast(data) {
-    for (i=0; i < data.list.length; i++) {
-        unformattedDate = data.list[i].dt_txt
-        formatAPIDate(unformattedDate);
-    }    
-} 
-
-
-function do5DayForecastWork(formattedDate) {
-    //console.log(formattedDate);
-    if (formattedDate === day1Date) {
-        console.log('WE HAVE A MATCH!')                     //THIS WORKS!!!!!!!!!!!!
-        //The API date is formatted and matches my day1Date variable value; HOWEVER, since it has 3 hour updates, I get MULTIPLE returns from the API data for each day
-        //Add logic that pulls the temperature based on the date for a SPECIFIC TIME INTERVAL (IE: 03:00:00)
-        //I have notes in the 'notes' file that may help with this step!
-    }
+    getUVIndex(lat, lon);    
+    get5DayForecast(lat, lon);                     
 }
 
 
