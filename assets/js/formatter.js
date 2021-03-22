@@ -6,32 +6,6 @@ String.prototype.removeCharAt = function (i) {
 }
 
 
-function formatAPIDate(unformattedDate) {   
-let formattedDate = unformattedDate.removeCharAt(12);
-formattedDate = formattedDate.removeCharAt(12);
-formattedDate = formattedDate.removeCharAt(12);            
-formattedDate = formattedDate.removeCharAt(12);                              
-formattedDate = formattedDate.removeCharAt(12);                            
-formattedDate = formattedDate.removeCharAt(12);                                
-formattedDate = formattedDate.removeCharAt(12);                               
-formattedDate = formattedDate.removeCharAt(12);                                 
-formattedDate = formattedDate.removeCharAt(12);                                    
-formattedDate = formattedDate.removeCharAt(12);  
-formattedDate = formattedDate.trim();
-//console.log(formattedDate);                             //Before sending the date to the 'do5DayForecastWork' function, I need to select only ONE of each date
-getOneOfEachDate(formattedDate);
-}
-
-
-
-function getOneOfEachDate(formattedDate) {
-    console.log(formattedDate);
-    console.log(typeof formattedDate);
-    
-
-    do5DayForecastWork(formattedDate);
-}
-
 
 
 var temperatureConversion = function (temp) {

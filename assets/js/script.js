@@ -132,12 +132,22 @@ function formatWeatherData(data) {
 
 function do5DayForecastWork(data) {
     today = data.current.dt                                                                        
-    day1Date = data.daily[1].dt                                                                   
-    day2Date = data.daily[2].dt                                                                   
-    day3Date = data.daily[3].dt                                                                 
-    day4Date = data.daily[4].dt                                                                   
-    day5Date = data.daily[5].dt                                                                      
+    //d1Temp = data.daily[1].temp.day;  
+    D1Temp = temperatureConversion(data.daily[1].temp.day);
+    D2Temp = temperatureConversion(data.daily[2].temp.day);
+    D3Temp = temperatureConversion(data.daily[3].temp.day);
+    D4Temp = temperatureConversion(data.daily[4].temp.day);
+    D5Temp = temperatureConversion(data.daily[5].temp.day);
+    console.log(D1Temp); 
+    console.log(D2Temp); 
+    console.log(D3Temp); 
+    console.log(D4Temp); 
+    console.log(D5Temp);                                                                                                                                                                               
 }
+
+
+
+
 
 //STORES DATA INTO VARIABLES AND PASSES IT TO FUNCTION THAT MAKES API CALL
 function formatUVindex(data) {
