@@ -123,6 +123,7 @@ function formatWeatherData(data) {
     weatherData = data;
     city = weatherData.name;
     temp = weatherData.main.temp;
+    temp = temperatureConversion(temp);
     hum = weatherData.main.humidity;
     ws = weatherData.wind.speed;
     description = weatherData.weather[0].description;
@@ -162,10 +163,6 @@ function do5DayForecastWork(formattedDate) {
         //I have notes in the 'notes' file that may help with this step!
     }
 }
-
-
-
-
 
 
 //ADDS DATA TO HTML
@@ -234,7 +231,7 @@ searchBtn.addEventListener('click', getCityName);
 
 // The 5 day forecast will populate in the small cards
 // The UV index will be colorcoded
-// The temperature will be converted into Fahrenheit
+// The temperature will be converted from Kelvin to Fahrenheit
 // Descriptive icons will be added
 
 

@@ -22,3 +22,12 @@ formattedDate = formattedDate.trim();
 //console.log(formattedDate);                             //THIS WORKS - PASS IT BACK TO MAIN JS FILE
 do5DayForecastWork(formattedDate);
 }
+
+
+
+var temperatureConversion = function (temp) {
+    temp = (temp - 273.15) * 1.8000 + 32;
+    temp = temp.toFixed(0);
+    //console.log(temp);
+    return temp;
+}
