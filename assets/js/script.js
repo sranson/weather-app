@@ -8,11 +8,9 @@ var windSpeed = document.getElementById("windSpeed");
 var pastCities = document.getElementById("pastCities");
 var listItem = document.getElementById("listItem");
 var uvIndex = document.getElementById("uvIndex");
-var topIcon = document.getElementById('topIcon');
-
+var topIcon = document.getElementById("topIcon");
 
 //http://openweathermap.org/img/w/10d.png
-
 
 // VARIABLES
 //==========================================================================================
@@ -24,10 +22,6 @@ temperatureArray = [];
 humidityArray = [];
 iconArray = [];
 //==========================================================================================
-
-
-
-
 
 //FUNCTIONS
 //==========================================================================================
@@ -44,7 +38,7 @@ function getCityName() {
   cityName = searchBox.value;
   getWeatherData(cityName);
   showSearchedFor(cityName);
-  weeklyForecast.innerHTML = '';
+  weeklyForecast.innerHTML = "";
   clearText();
 }
 
@@ -61,14 +55,13 @@ function formatWeatherData(data) {
   showWeatherData(city, temp, hum, ws, description, icon);
 }
 
-
 // FORMATS AND DISPLAYS 5 DAY FORECAST DATA ON HTML PAGE
 function do5DayForecastWork(data) {
   // 5 DAY FORECAST ARRAYS
-    dateArray = [];
-    temperatureArray = [];
-    humidityArray = [];
-    iconArray = []
+  dateArray = [];
+  temperatureArray = [];
+  humidityArray = [];
+  iconArray = [];
   for (i = 1; i < 6; i++) {
     dateArray.push(moment.unix(data.daily[i].dt).format("MM/DD/YYYY"));
     temperatureArray.push(temperatureConversion(data.daily[i].temp.day));
@@ -87,7 +80,7 @@ function show5DayForecast() {
     <div class="card-body">
         <h5 class="card-title" style="font-size: 16px">${dateArray[i]}</h5>
         <img src="https://openweathermap.org/img/w/${iconArray[i]}.png">
-        <p class="card-text">Temp: ${temperatureArray[i]}</p>
+        <p class="card-text">Temp: ${temperatureArray[i] + " &#8457;"}</p>
         <p>Humidity: ${humidityArray[i]}%</p>
     </div>
     </div>
@@ -107,20 +100,32 @@ function formatUVindex(data) {
 //ADDS DATA TO HTML
 function showWeatherData(city, temp, hum, ws, description, icon) {
   cityNM.innerHTML = city;
-  temperature.innerHTML = `Temperature: ${temp}`;
+  temperature.innerHTML = `Temperature: ${temp} &#8457;`;
   humidity.innerHTML = `Humidity: ${hum}%`;
   windSpeed.innerHTML = `Wind Speed: ${ws} MPH`;
   iconSrc = "https://openweathermap.org/img/w/" + icon + ".png";
   topIcon.innerHTML = `
     <img src="${iconSrc}" alt="">
-    `
+    `;
 }
 
 //ADDS UV INDEX TO HTML
 function showUVIndex(data) {
   UVData = data;
   finalUVIndex = UVData.value;
-  uvIndex.innerHTML = `UV Index: ${finalUVIndex}`;
+  uvColorNumber = finalUVIndex.toFixed(0);
+  if (uvColorNumber <= 2) {
+    uvColorNumber = "green";
+  } else if (uvColorNumber >= 3 && uvColorNumber <= 5) {
+    uvColorNumber = "yellow";
+  } else if (uvColorNumber >= 6 && uvColorNumber <= 7) {
+    uvColorNumber = "orange";
+  } else if (uvColorNumber >= 8 && uvColorNumber <= 10) {
+    uvColorNumber = "red";
+  } else if (uvColorNumber >= 11) {
+    uvColorNumber = "violet";
+  }
+  uvIndex.innerHTML = `UV Index: <button class="btn" style="background-color:${uvColorNumber}">${finalUVIndex}</button>`;
 }
 
 // REMOVES HIDDEN CLASS AND ADDS SEARCH HISTORY CITIES TO AN ARRAY
@@ -146,18 +151,15 @@ function addCitytoSearchHistory() {
 
 // MAKES API CALL FOR CITIES IN THE SEARCH HISTORY
 function showHistory() {
-    weeklyForecast.innerHTML = '';
+  weeklyForecast.innerHTML = "";
   getWeatherData(previousCityName);
 }
 
 // Clears content in text input after "search" button clicked
 function clearText() {
-    searchBox.value = '';
+  searchBox.value = "";
 }
 //==========================================================================================
-
-
-
 
 // EVENT LISTENERS
 //==========================================================================================
@@ -170,7 +172,3 @@ $(pastCities).click(function (e) {
 searchBtn.addEventListener("click", getCityName);
 //==========================================================================================
 
-
-// The UV index will be colorcoded
-// Add the "Degrees in fahrenheit" to ALL temperatures
-// Descriptive icons will be added
