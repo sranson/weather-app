@@ -130,19 +130,27 @@ function formatWeatherData(data) {
 }
 
 
-function do5DayForecastWork(data) {
-    today = data.current.dt                                                                        
-    //d1Temp = data.daily[1].temp.day;  
+function do5DayForecastWork(data) {    
+    // 5 DAY FORECAST DATES
+    D1 = moment.unix(data.daily[1].dt).format('MM/DD/YYYY');                                           
+    D2 = moment.unix(data.daily[2].dt).format('MM/DD/YYYY'); 
+    D3 = moment.unix(data.daily[3].dt).format('MM/DD/YYYY'); 
+    D4 = moment.unix(data.daily[4].dt).format('MM/DD/YYYY'); 
+    D5 = moment.unix(data.daily[5].dt).format('MM/DD/YYYY'); 
+    
+    // 5 DAY FORECAST TEMPERATURES
     D1Temp = temperatureConversion(data.daily[1].temp.day);
     D2Temp = temperatureConversion(data.daily[2].temp.day);
     D3Temp = temperatureConversion(data.daily[3].temp.day);
     D4Temp = temperatureConversion(data.daily[4].temp.day);
     D5Temp = temperatureConversion(data.daily[5].temp.day);
-    console.log(D1Temp); 
-    console.log(D2Temp); 
-    console.log(D3Temp); 
-    console.log(D4Temp); 
-    console.log(D5Temp);                                                                                                                                                                               
+
+    //5 DAY FORECAST HUMIDITIES
+    D1Hum = data.daily[1].humidity;
+    D2Hum = data.daily[2].humidity;
+    D3Hum = data.daily[3].humidity;
+    D4Hum = data.daily[4].humidity;
+    D5Hum = data.daily[5].humidity;
 }
 
 
