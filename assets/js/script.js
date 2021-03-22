@@ -8,9 +8,7 @@ var windSpeed = document.getElementById("windSpeed");
 var pastCities = document.getElementById("pastCities");
 var listItem = document.getElementById("listItem");
 var uvIndex = document.getElementById("uvIndex");
-var day1 = document.getElementById("day1");
-var day1Date = document.getElementById("day1Date");
-var weeklyForecast = document.getElementById("weeklyForecast");
+
 
 // VARIABLES
 //==========================================================================================
@@ -114,6 +112,8 @@ function getCityName() {
   cityName = searchBox.value;
   getWeatherData(cityName);
   showSearchedFor(cityName);
+  weeklyForecast.innerHTML = '';
+  clearText();
 }
 
 //STORES WEATHER DATA INTO VARIABLES
@@ -133,8 +133,13 @@ dateArray = [];
 temperatureArray = [];
 humidityArray = [];
 
+
+
 function do5DayForecastWork(data) {
   // 5 DAY FORECAST ARRAYS
+    dateArray = [];
+    temperatureArray = [];
+    humidityArray = [];
   for (i = 1; i < 6; i++) {
     dateArray.push(moment.unix(data.daily[i].dt).format("MM/DD/YYYY"));
     temperatureArray.push(temperatureConversion(data.daily[i].temp.day));
@@ -147,7 +152,7 @@ function show5DayForecast() {
   for (i = 0; i < 5; i++) {
     weeklyForecast.innerHTML += `
     <div class="col-sm-2">
-    <div class="card blueBackground" id="day1">
+    <div class="card blueBackground">
     <div class="card-body">
         <h5 class="card-title" style="font-size: 16px">${dateArray[i]}</h5>
         <p class="card-text">Temp: ${temperatureArray[i]}</p>
@@ -205,7 +210,12 @@ function addCitytoSearchHistory() {
 
 // MAKES API CALL FOR CITIES IN THE SEARCH HISTORY
 function showHistory() {
+    weeklyForecast.innerHTML = '';
   getWeatherData(previousCityName);
+}
+
+function clearText() {
+    searchBox.value = '';
 }
 
 //==========================================================================================
