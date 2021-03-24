@@ -1,0 +1,16 @@
+Variables to store in LocalStorage:
+
+Today's Weather:
+1. City Name
+2. Icon
+3. Temperature
+4. Humidity
+5. Wind Speed
+6. UV Index
+
+
+5 Day Forecast"
+1. Date
+2. Icon
+3. Temperature
+4. Humidity

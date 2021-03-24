@@ -53,6 +53,16 @@ function formatWeatherData(data) {
   description = weatherData.weather[0].description;
   icon = weatherData.weather[0].icon;
   showWeatherData(city, temp, hum, ws, description, icon);
+  pushToLocalStorage(city, temp, hum, ws, description, icon);
+}
+
+function pushToLocalStorage(city, temp, hum, ws, description, icon) {
+  localStorage.setItem("City", city);
+  localStorage.setItem("Temperature", temp);
+  localStorage.setItem("Humidity", hum);
+  localStorage.setItem("Wind Speed", ws);
+  localStorage.setItem("Description", description);
+  localStorage.setItem("Icon", icon);
 }
 
 // FORMATS AND DISPLAYS 5 DAY FORECAST DATA ON HTML PAGE
@@ -113,6 +123,7 @@ function showWeatherData(city, temp, hum, ws, description, icon) {
 function showUVIndex(data) {
   UVData = data;
   finalUVIndex = UVData.value;
+  localStorage.setItem("UV Index", finalUVIndex);
   uvColorNumber = finalUVIndex.toFixed(0);
   if (uvColorNumber <= 2) {
     uvColorNumber = "green";
@@ -171,4 +182,3 @@ $(pastCities).click(function (e) {
 
 searchBtn.addEventListener("click", getCityName);
 //==========================================================================================
-
