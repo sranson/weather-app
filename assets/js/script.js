@@ -59,7 +59,6 @@ function formatWeatherData(data) {
 function pushToLocalStorage(city, temp, hum, ws, description, icon) {
   localStorage.setItem("City", city);
   localStorage.setItem("Temperature", temp);
-  console.log(temp);
   localStorage.setItem("Humidity", hum);
   localStorage.setItem("Wind Speed", ws);
   localStorage.setItem("Description", description);
@@ -80,6 +79,22 @@ function do5DayForecastWork(data) {
     iconArray.push(data.daily[i].weather[0].icon);
   }
   show5DayForecast();
+  push5DayForecastToLocalStorage();
+}
+
+function push5DayForecastToLocalStorage() {
+  for (i = 0; i < 5; i++) {
+    localStorage.setItem(`Date: ${i}`, dateArray[i]);
+    localStorage.setItem(`Day ${i} Temperature`, temperatureArray[i]);
+    localStorage.setItem(`Day ${i} Humidity`, humidityArray[i]);
+    localStorage.setItem(`Day ${i} Icon`, iconArray[i]);
+  }
+
+  console.log(dateArray);
+  console.log(temperatureArray);
+  console.log(humidityArray);
+  console.log(iconArray);
+  //localStorage.setItem(`Date${i}:`, dateArray[i]);
 }
 
 // RENDERS 5 DAY FORECAST TO THE PAGE
