@@ -59,6 +59,7 @@ function formatWeatherData(data) {
 function pushToLocalStorage(city, temp, hum, ws, description, icon) {
   localStorage.setItem("City", city);
   localStorage.setItem("Temperature", temp);
+  console.log(temp);
   localStorage.setItem("Humidity", hum);
   localStorage.setItem("Wind Speed", ws);
   localStorage.setItem("Description", description);
@@ -110,7 +111,7 @@ function formatUVindex(data) {
 //ADDS DATA TO HTML
 function showWeatherData(city, temp, hum, ws, description, icon) {
   cityNM.innerHTML = city;
-  temperature.innerHTML = `Temperature: ${temp} &#8457;`;
+  temp.innerHTML = `Temperature: ${temp} &#8457;`;
   humidity.innerHTML = `Humidity: ${hum}%`;
   windSpeed.innerHTML = `Wind Speed: ${ws} MPH`;
   iconSrc = "https://openweathermap.org/img/w/" + icon + ".png";
@@ -170,6 +171,33 @@ function showHistory() {
 function clearText() {
   searchBox.value = "";
 }
+
+function getLocalStorageData() {
+  city = localStorage.getItem("City");
+  temp = localStorage.getItem("Temperature");
+  hum = localStorage.getItem("Humidity");
+  ws = localStorage.getItem("Wind Speed");
+  icon = localStorage.getItem("Icon");
+  //console.log(city);
+  //console.log(temperature);
+  //console.log(hum);
+  //console.log(ws);
+  //console.log(icon);
+  showWeatherOnLoad(city, temp, hum, ws, icon);
+}
+
+function showWeatherOnLoad(city, temp, hum, ws, icon) {
+  cityNM.classList.remove("hidden");
+  cityNM.innerHTML = city;
+  temperature.innerHTML = `Temperature: ${temp} &#8457;`;
+  humidity.innerHTML = `Humidity: ${hum}%`;
+  windSpeed.innerHTML = `Wind Speed: ${ws} MPH`;
+  iconSrc = "https://openweathermap.org/img/w/" + icon + ".png";
+  topIcon.innerHTML = `
+    <img src="${iconSrc}" alt="">
+    `;
+}
+
 //==========================================================================================
 
 // EVENT LISTENERS
@@ -182,3 +210,5 @@ $(pastCities).click(function (e) {
 
 searchBtn.addEventListener("click", getCityName);
 //==========================================================================================
+
+window.onload = getLocalStorageData();
