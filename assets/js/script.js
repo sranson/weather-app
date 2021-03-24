@@ -82,19 +82,14 @@ function do5DayForecastWork(data) {
   push5DayForecastToLocalStorage();
 }
 
+// Stores 5 Day Forecast data to localStorage
 function push5DayForecastToLocalStorage() {
   for (i = 0; i < 5; i++) {
-    localStorage.setItem(`Date: ${i}`, dateArray[i]);
-    localStorage.setItem(`Day ${i} Temperature`, temperatureArray[i]);
-    localStorage.setItem(`Day ${i} Humidity`, humidityArray[i]);
-    localStorage.setItem(`Day ${i} Icon`, iconArray[i]);
+    localStorage.setItem(`Date${i}`, dateArray[i]);
+    localStorage.setItem(`Day${i} Temperature`, temperatureArray[i]);
+    localStorage.setItem(`Day${i} Humidity`, humidityArray[i]);
+    localStorage.setItem(`Day${i} Icon`, iconArray[i]);
   }
-
-  console.log(dateArray);
-  console.log(temperatureArray);
-  console.log(humidityArray);
-  console.log(iconArray);
-  //localStorage.setItem(`Date${i}:`, dateArray[i]);
 }
 
 // RENDERS 5 DAY FORECAST TO THE PAGE
@@ -197,6 +192,7 @@ function getLocalStorageData() {
   uvColor = localStorage.getItem("uvColor");
   icon = localStorage.getItem("Icon");
   showWeatherOnLoad(city, temp, hum, ws, UV, uvColor, icon);
+  show5DayForecastOnRefresh();
 }
 
 function showWeatherOnLoad(city, temp, hum, ws, UV, uvColor, icon) {
@@ -210,6 +206,27 @@ function showWeatherOnLoad(city, temp, hum, ws, UV, uvColor, icon) {
   topIcon.innerHTML = `
     <img src="${iconSrc}" alt="">
     `;
+}
+
+function show5DayForecastOnRefresh() {
+  for (i = 0; i < 5; i++) {
+    date = localStorage.getItem(`Date${i}`);
+    temp = localStorage.getItem(`Day${i} Temperature`);
+    hum = localStorage.getItem(`Day${i} Humidity`);
+    icon = localStorage.getItem(`Day${i} Icon`);
+    weeklyForecast.innerHTML += `
+    <div class="col-sm-2">
+    <div class="card blueBackground">
+    <div class="card-body">
+        <h5 class="card-title" style="font-size: 16px">${date}</h5>
+        <img src="https://openweathermap.org/img/w/${icon}.png">
+        <p class="card-text">Temp: ${temp + " &#8457;"}</p>
+        <p>Humidity: ${hum}%</p>
+    </div>
+    </div>
+    </div>    
+`;
+  }
 }
 
 //==========================================================================================
@@ -228,5 +245,4 @@ searchBtn.addEventListener("click", getCityName);
 window.onload = getLocalStorageData();
 
 //TO -DO
-// 1. Add 5 Day forecast to localStorage
 // 2. Render 5 Day forecast on page reload
