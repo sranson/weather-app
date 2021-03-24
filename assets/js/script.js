@@ -138,6 +138,7 @@ function showUVIndex(data) {
     uvColorNumber = "violet";
   }
   uvIndex.innerHTML = `UV Index: <button class="btn" style="background-color:${uvColorNumber}">${finalUVIndex}</button>`;
+  localStorage.setItem("uvColor", uvColorNumber);
 }
 
 // REMOVES HIDDEN CLASS AND ADDS SEARCH HISTORY CITIES TO AN ARRAY
@@ -177,21 +178,19 @@ function getLocalStorageData() {
   temp = localStorage.getItem("Temperature");
   hum = localStorage.getItem("Humidity");
   ws = localStorage.getItem("Wind Speed");
+  UV = localStorage.getItem("UV Index");
+  uvColor = localStorage.getItem("uvColor");
   icon = localStorage.getItem("Icon");
-  //console.log(city);
-  //console.log(temperature);
-  //console.log(hum);
-  //console.log(ws);
-  //console.log(icon);
-  showWeatherOnLoad(city, temp, hum, ws, icon);
+  showWeatherOnLoad(city, temp, hum, ws, UV, uvColor, icon);
 }
 
-function showWeatherOnLoad(city, temp, hum, ws, icon) {
+function showWeatherOnLoad(city, temp, hum, ws, UV, uvColor, icon) {
   cityNM.classList.remove("hidden");
   cityNM.innerHTML = city;
   temperature.innerHTML = `Temperature: ${temp} &#8457;`;
   humidity.innerHTML = `Humidity: ${hum}%`;
   windSpeed.innerHTML = `Wind Speed: ${ws} MPH`;
+  uvIndex.innerHTML = `UV Index: <button class="btn" style="background-color:${uvColor}">${UV}</button>`;
   iconSrc = "https://openweathermap.org/img/w/" + icon + ".png";
   topIcon.innerHTML = `
     <img src="${iconSrc}" alt="">
@@ -212,3 +211,7 @@ searchBtn.addEventListener("click", getCityName);
 //==========================================================================================
 
 window.onload = getLocalStorageData();
+
+//TO -DO
+// 1. Add 5 Day forecast to localStorage
+// 2. Render 5 Day forecast on page reload
