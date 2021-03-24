@@ -56,6 +56,7 @@ function formatWeatherData(data) {
   pushToLocalStorage(city, temp, hum, ws, description, icon);
 }
 
+// Pushes weather data to local Storage
 function pushToLocalStorage(city, temp, hum, ws, description, icon) {
   localStorage.setItem("City", city);
   localStorage.setItem("Temperature", temp);
@@ -191,11 +192,11 @@ function getLocalStorageData() {
   UV = localStorage.getItem("UV Index");
   uvColor = localStorage.getItem("uvColor");
   icon = localStorage.getItem("Icon");
-  showWeatherOnLoad(city, temp, hum, ws, UV, uvColor, icon);
+  showWeatherOnRefresh(city, temp, hum, ws, UV, uvColor, icon);
   show5DayForecastOnRefresh();
 }
 
-function showWeatherOnLoad(city, temp, hum, ws, UV, uvColor, icon) {
+function showWeatherOnRefresh(city, temp, hum, ws, UV, uvColor, icon) {
   cityNM.classList.remove("hidden");
   cityNM.innerHTML = city;
   temperature.innerHTML = `Temperature: ${temp} &#8457;`;
@@ -240,9 +241,6 @@ $(pastCities).click(function (e) {
 });
 
 searchBtn.addEventListener("click", getCityName);
-//==========================================================================================
 
 window.onload = getLocalStorageData();
-
-//TO -DO
-// 2. Render 5 Day forecast on page reload
+//==========================================================================================
