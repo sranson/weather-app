@@ -246,11 +246,9 @@ searchBtn.addEventListener("click", getCityName);
 window.onload = function () {
   if (localStorage.getItem("City") === null) {
     fiveDayForecast.innerHTML = "";
-    console.log("I DO NOT HAVE DATA- HIDE EVERYTHING");
   } else {
     getLocalStorageData();
   }
 };
 
-//window.onload = getLocalStorageData();
 //==========================================================================================
