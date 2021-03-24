@@ -9,6 +9,7 @@ var pastCities = document.getElementById("pastCities");
 var listItem = document.getElementById("listItem");
 var uvIndex = document.getElementById("uvIndex");
 var topIcon = document.getElementById("topIcon");
+var fiveDayForecast = document.getElementById("fiveDayForecast");
 
 //http://openweathermap.org/img/w/10d.png
 
@@ -242,5 +243,14 @@ $(pastCities).click(function (e) {
 
 searchBtn.addEventListener("click", getCityName);
 
-window.onload = getLocalStorageData();
+window.onload = function () {
+  if (localStorage.getItem("City") === null) {
+    fiveDayForecast.innerHTML = "";
+    console.log("I DO NOT HAVE DATA- HIDE EVERYTHING");
+  } else {
+    getLocalStorageData();
+  }
+};
+
+//window.onload = getLocalStorageData();
 //==========================================================================================
