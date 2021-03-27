@@ -3,6 +3,7 @@ var searchBtn = document.getElementById("searchBtn");
 var cityNM = document.getElementById("cityName");
 var date = document.getElementById("date");
 var pastCities = document.getElementById("pastCities");
+var showDescr = document.getElementById("showDescr");
 var temperature = document.getElementById("temp");
 var windSpeed = document.getElementById("windSpeed");
 var pastCities = document.getElementById("pastCities");
@@ -126,6 +127,7 @@ function showWeatherData(city, temp, hum, ws, description, icon) {
   temp.innerHTML = `Temperature: ${temp} &#8457;`;
   humidity.innerHTML = `Humidity: ${hum}%`;
   windSpeed.innerHTML = `Wind Speed: ${ws} MPH`;
+  showDescr.innerHTML = `${description}`;
   iconSrc = "https://openweathermap.org/img/w/" + icon + ".png";
   topIcon.innerHTML = `
     <img src="${iconSrc}" alt="">
@@ -193,11 +195,21 @@ function getLocalStorageData() {
   UV = localStorage.getItem("UV Index");
   uvColor = localStorage.getItem("uvColor");
   icon = localStorage.getItem("Icon");
-  showWeatherOnRefresh(city, temp, hum, ws, UV, uvColor, icon);
+  description = localStorage.getItem("Description");
+  showWeatherOnRefresh(city, temp, hum, ws, UV, uvColor, icon, description);
   show5DayForecastOnRefresh();
 }
 
-function showWeatherOnRefresh(city, temp, hum, ws, UV, uvColor, icon) {
+function showWeatherOnRefresh(
+  city,
+  temp,
+  hum,
+  ws,
+  UV,
+  uvColor,
+  icon,
+  description
+) {
   cityNM.classList.remove("hidden");
   cityNM.innerHTML = city;
   temperature.innerHTML = `Temperature: ${temp} &#8457;`;
@@ -208,6 +220,7 @@ function showWeatherOnRefresh(city, temp, hum, ws, UV, uvColor, icon) {
   topIcon.innerHTML = `
     <img src="${iconSrc}" alt="">
     `;
+  showDescr.innerHTML = `${description}`;
 }
 
 function show5DayForecastOnRefresh() {
