@@ -1,11 +1,16 @@
 # Weather App
 
-For this assignment I was tasked with creating a weather application. Weather data is provided by OpenWeather API. Once the user searches for a city, the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index are displayed. Additionally, the UV Index is color coded to indicate whether the UV Index conditions are favorable, moderate, or severe. Lastly, the 5-Day Forecast weather data is provided that displays the date, an icon representation of weather conditions, the temperature, and the humidity.
+Weather data is provided by OpenWeather API. Once the user searches for a city, the city name, the date, an icon representation of weather conditions, the temperature, the humidity, the wind speed, and the UV index are displayed. Additionally, the UV Index is color coded to indicate whether the UV Index conditions are favorable, moderate, or severe. Lastly, the 5-Day Forecast weather data is provided that displays the date, an icon representation of weather conditions, the temperature, and the humidity.
 
-## I practiced the following:
-1. Accessing third-party data using API calls
-2. Additional practice with Day/Time formatting using Momentjs
-3. Formatting and using Epoch Unix time
+## Technologies Used:
+1. HTML
+2. CSS
+3. Bootstrap
+4. jQuery
+5. Third-party APIs
+6. Momentjs
+7. Postman
+
 
 
 ## Screenshots
